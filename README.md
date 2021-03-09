@@ -33,6 +33,7 @@ To evaluate the method using the pre-trained model, download the models for the 
 python test.py \
 --img_path path_to_img_folder \
 --audio_path path_to_audio_data \
+--checkpoints_dir path_to_the_pretrained_model \
 --dataset replica \
 --audio_sampling_rate 44100 \
 --max_depth 14.104
@@ -42,6 +43,7 @@ python test.py \
 python test.py \
 --img_path path_to_img_folder \
 --audio_path path_to_audio_data \
+--checkpoints_dir path_to_the_pretrained_model \
 --dataset mp3d \
 --audio_sampling_rate 16000 \
 --max_depth 10.0
