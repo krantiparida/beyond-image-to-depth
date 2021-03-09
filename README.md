@@ -9,9 +9,11 @@ We address the problem of estimating depth with multi modal audio visual data. I
 ![teaser](./teaser.png)
 
 ## Requirements
-* Python 3.6 is used. Basic requirements are listed in the 'requirements.txt'
-```
-pip install -r requirements.txt 
+The code is tesed with
+``` 
+- Python 3.6 
+- PyTorch 1.6.0
+- Numpy 1.19.5
 ```
 
 ## Dataset

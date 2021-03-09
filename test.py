@@ -1,19 +1,13 @@
 
-# python test_mp3d.py --img_path /data1/kranti/audio-visual-depth/dataset/visual_echoes/images/replica/scene_observations_128.pkl --audio_path /data1/kranti/audio-visual-depth/dataset/visual_echoes/echoes/replica/echoes_navigable/ --dataset replica --audio_sampling_rate 44100 --max_depth 14.104
 import os 
 import torch
 import numpy as np
-import matplotlib as mpl
-import matplotlib.cm as cm
-import matplotlib.pyplot as plt
-import random
 from options.test_options import TestOptions
 import torchvision.transforms as transforms
 from models.models import ModelBuilder
 from models.audioVisual_model import AudioVisualModel
 from data_loader.custom_dataset_data_loader import CustomDatasetDataLoader
 from util.util import compute_errors
-import numpy as np
 from models import criterion 
 
 
