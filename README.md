@@ -51,7 +51,7 @@ python test.py \
 
 
 ## License and Citation
-The usage of this software is under [MIT License](https://github.com/krantiparida/beyond-image-to-depth/blob/c669d2164ad06290dc28d4c77de555ac2bf896d1/LICENSE).
+The usage of this software is under [MIT License](https://github.com/krantiparida/betond-image-to-depth/blob/main/LICENSE).
 ```
 @inproceedings{parida2021beyond,
   title={Beyond Image to Depth: Improving Depth Prediction using Echoes},
