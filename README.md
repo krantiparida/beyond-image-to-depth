@@ -62,4 +62,4 @@ The usage of this software is under [MIT License](https://github.com/krantiparid
 ```
 
 ## Acknowledgement
-Some portion of the code are adapted from [Rouhan Gao](https://ai.stanford.edu/~rhgao/). Thanks Rouhan!
+Some portion of the code are adapted from [Ruohan Gao](https://ai.stanford.edu/~rhgao/). Thanks Ruohan!
