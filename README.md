@@ -25,6 +25,19 @@ The code is tesed with
 ## Pre-trained Model
 We have provided pre-trained model for both the datasets [here](https://drive.google.com/drive/folders/1k26oP5D1YTrWIBFblySIIqZzTT6kF4yd?usp=sharing). For each of the dataset four different parts of the model are saved individually with name `rgbdepth_*`, `audiodepth_*`, `material_*`, `attention_*`, where `*` represents the name of the dataset, i.e. `replica` or `mp3d`.
 
+## Training
+
+To train the model, first download the pre-trained material net from above link. 
+```
+python train.py \
+--validation_on \
+--dataset mp3d \
+--img_path path_to_img_folder \
+--metadatapath path_to_metadata \
+--audio_path path_to_audio_folder \
+--checkpoints_dir path_to_save_checkpoints \
+--init_material_weight path_to_pre-trained_material_net
+```
 ## Evaluation 
 
 To evaluate the method using the pre-trained model, download the models for the corresponding dataset and the dataset.
@@ -34,9 +47,7 @@ python test.py \
 --img_path path_to_img_folder \
 --audio_path path_to_audio_data \
 --checkpoints_dir path_to_the_pretrained_model \
---dataset replica \
---audio_sampling_rate 44100 \
---max_depth 14.104
+--dataset replica
 ```
 - Evaluation for Matterport3D dataset
 ```
@@ -44,9 +55,7 @@ python test.py \
 --img_path path_to_img_folder \
 --audio_path path_to_audio_data \
 --checkpoints_dir path_to_the_pretrained_model \
---dataset mp3d \
---audio_sampling_rate 16000 \
---max_depth 10.0
+--dataset mp3d
 ```
 
 
