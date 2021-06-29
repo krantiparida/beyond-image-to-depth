@@ -10,7 +10,6 @@ from data_loader.custom_dataset_data_loader import CustomDatasetDataLoader
 from util.util import compute_errors
 from models import criterion 
 
-
 loss_criterion = criterion.LogDepthLoss()
 opt = TestOptions().parse()
 opt.device = torch.device("cuda")

@@ -36,11 +36,25 @@ class ModelBuilder():
             net.load_state_dict(torch.load(weights))
         return net
 
-    def build_material_property(self, nclass=10, weights=''):
-        original_resnet = torchvision.models.resnet18(pretrained=False)
-        net = MaterialPropertyNet(nclass, original_resnet)
-        net.apply(weights_init)
-        print('Training material property from scratch')
+    def build_material_property(self, nclass=10, weights='', init_weights=''):
+        if len(init_weights) > 0:
+            original_resnet = torchvision.models.resnet18(pretrained=True)
+            net = MaterialPropertyNet(23, original_resnet)
+            pre_trained_dict = torch.load(init_weights)['state_dict']
+            pre_trained_mod_dict = OrderedDict()
+            for k,v in pre_trained_dict.items():
+                new_key = '.'.join(k.split('.')[1:])
+                pre_trained_mod_dict[new_key] = v
+            pre_trained_mod_dict = {k: v for k, v in pre_trained_mod_dict.items() if k in net.state_dict()}
+            net.load_state_dict(pre_trained_mod_dict, strict=False)
+            
+            print('Initial Material Property Net Loaded')
+            net.fc = nn.Linear(512, nclass)
+        else:
+            original_resnet = torchvision.models.resnet18(pretrained=False)
+            net = MaterialPropertyNet(nclass, original_resnet)
+            net.apply(weights_init)
+            print('Moaterial Propert Net loaded')
         
         if len(weights) > 0:
             print('Loading weights for material property stream')

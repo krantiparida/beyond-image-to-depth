@@ -14,16 +14,14 @@ class BaseOptions():
 		self.parser.add_argument('--img_path', type=str, default= '/data1/kranti/audio-visual-depth/dataset/visual_echoes/images/mp3d_split_wise', help='root path to the file that contains the .pkl file')
 		self.parser.add_argument('--metadatapath', type=str, default= '/data1/kranti/audio-visual-depth/dataset/visual_echoes/metadata/mp3d', help= 'path to metadata file for different split')
 		self.parser.add_argument('--audio_path', type=str, default= '/data1/kranti/audio-visual-depth/dataset/visual_echoes/echoes/mp3d/echoes_navigable', help='path to the folder that contains echo responses')
-		self.parser.add_argument('--gpu_ids', type=str, default='0,1,2,3', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
-		self.parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints/', help='models are saved here')
+		self.parser.add_argument('--checkpoints_dir', type=str, default= '', help='path to save checkpoints')
+		self.parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
 		self.parser.add_argument('--batchSize', type=int, default=64, help='input batch size')
 		self.parser.add_argument('--nThreads', default=8, type=int, help='# threads for loading data')
-		# self.parser.add_argument('--audio_sampling_rate', default=16000, type=int, help='audio sampling rate')
 		self.parser.add_argument('--audio_length', default=0.06, type=float, help='audio length, default 0.06s')
 		self.parser.add_argument('--audio_normalize', type=bool, default=False, help='whether to normalize the audio')
 		self.parser.add_argument('--image_transform', type=bool, default=True, help='whether to transform the image data')
 		self.parser.add_argument('--image_resolution', default=128, type=int, help='the resolution of image for cropping')
-		# self.parser.add_argument('--max_depth', default=10.0, type=float, help='value for the maximum depth of the data')
 		self.parser.add_argument('--dataset', default='mp3d', type=str, help='replica/mp3d')
 		## scratch was added after one step of training done with material property initialization
 		self.initialized = True
@@ -77,5 +75,23 @@ class BaseOptions():
 			id = int(str_id)
 			if id >= 0:
 				self.opt.gpu_ids.append(id)
+
+		args = vars(self.opt)
+		print('------------ Options -------------')
+		for k, v in sorted(args.items()):
+			print('%s: %s' % (str(k), str(v)))
+		print('-------------- End ----------------')
+
+
+		# save to the disk
+		expr_dir = os.path.join(self.opt.checkpoints_dir, self.opt.dataset)
+		self.opt.expr_dir = expr_dir
+		util.mkdirs(expr_dir)
+		file_name = os.path.join(expr_dir, 'opt.txt')
+		with open(file_name, 'wt') as opt_file:
+			opt_file.write('------------ Options -------------\n')
+			for k, v in sorted(args.items()):
+				opt_file.write('%s: %s\n' % (str(k), str(v)))
+			opt_file.write('-------------- End ----------------\n')
 
 		return self.opt
